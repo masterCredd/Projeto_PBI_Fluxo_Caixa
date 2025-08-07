@@ -135,15 +135,47 @@ Garantir que todos os dados estejam no formato correto para análise.
 
 ### Medidas em Dax
 
-1. ➡️ Total de Receita(Entradas)
+1. ➡️ Total valores
+
+```dax
+Total Valores = SUMX('Relatório','Relatório'[Valor])
+```
+
+Esta fórmula calcula a soma total da coluna `'Valor'` percorrendo a tabela
+`'Relatório'` linha por linha.
+2. ➡️ Total de Receita(Entradas)
 
 ```dax
 Receita =
  CALCULATE(
-    SUMX('Relatório','Relatório'[Valor]),
+    [Total Valores],
     'Relatório'[Tipo Movimentação] IN{"Entradas"}
 )
 ```
 
-Esta fórmula calcula a soma total da coluna `'Valor'`, mas apenas para as linhas
-onde a `'Tipo Movimentação'` é `"Entradas"`.
+Esta fórmula calcula o valor da medida `[Total Valores]`, mas aplicando um
+filtro para que o cálculo considere apenas as linhas onde a
+ `'Tipo Movimentação'` é `'Entradas'`.
+3. ➡️ Despesas
+
+```dax
+Despesas = 
+CALCULATE(
+    [Total Valores],
+    'Relatório'[Tipo Movimentação] IN{"Saídas"}
+)
+```
+
+Esta fórmula calcula o valor da medida `[Total Valores]`, mas aplicando um
+filtro para que o cálculo considere apenas as linhas onde a
+`'Tipo Movimentação'` é `'Saídas'`.
+
+4.➡️ Saldo
+
+```dax
+Saldo = SUMX('Relatório','Relatório'[Saldo])
+```
+
+Esta fórmula percorre a tabela `'Relatório'` linha por linha e soma todos os
+valores que encontra na coluna `'Saldo'`.
+
