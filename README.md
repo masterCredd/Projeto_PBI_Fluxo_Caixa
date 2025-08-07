@@ -178,3 +178,10 @@ Saldo = SUMX('Relatório','Relatório'[Saldo])
 
 Esta fórmula percorre a tabela `'Relatório'` linha por linha e soma todos os
 valores que encontra na coluna `'Saldo'`.
+
+### Resultado Final
+
+1. Página Resumo
+    ![alt text](Resumo.png)
+2. Pagina Detalhamento
+    ![alt text](Detalhamento.png)
